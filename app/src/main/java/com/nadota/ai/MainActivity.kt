@@ -21,6 +21,54 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
     private lateinit var entry: EditText
 
     private var style = 0
+    private fun preguntarIA(mensaje: String) {
+    thread {
+        try {
+            val conexion = URL(
+                "https://nadota-ai-server.onrender.com/chat"
+            ).openConnection() as HttpURLConnection
+
+            conexion.requestMethod = "POST"
+            conexion.setRequestProperty(
+                "Content-Type", "application/json"
+            )
+            conexion.connectTimeout = 30000
+            conexion.readTimeout = 30000
+            conexion.doOutput = true
+
+            val datos = JSONObject()
+            datos.put("mensaje", mensaje)
+
+            conexion.outputStream.use {
+                it.write(datos.toString().toByteArray())
+            }
+
+            val respuesta = conexion.inputStream
+                .bufferedReader().use { it.readText() }
+
+            conexion.disconnect()
+
+            val texto = JSONObject(respuesta)
+                .getString("respuesta")
+
+            runOnUiThread {
+                history.append("\nNADOTA: $texto\n")
+                tts.speak(
+                    texto,
+                    TextToSpeech.QUEUE_FLUSH,
+                    null,
+                    "nadota"
+                )
+            }
+        } catch (e: Exception) {
+            runOnUiThread {
+                history.append(
+                    "\nNADOTA: No pude conectar con la IA.\n"
+                )
+            }
+        }
+    }
+    }
 
     private val blue = Color.rgb(0, 102, 255)
     private val cement = Color.rgb(224, 226, 229)
