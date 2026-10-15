@@ -185,11 +185,11 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
             if (msg.isNotEmpty()) {
                 history.append("\nTú: $msg\n")
 
-                tts.speak(
-                    msg,
-                    TextToSpeech.QUEUE_FLUSH,
-                    null,
-                    "nadota"
+                
+                
+                    
+                preguntarIA(msg)
+    
                 )
 
                 entry.text.clear()
