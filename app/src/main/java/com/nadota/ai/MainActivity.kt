@@ -190,7 +190,7 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
                     
                 preguntarIA(msg)
     
-                )
+                
 
                 entry.text.clear()
             }
@@ -200,13 +200,20 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
 
         setContentView(root)
     }
-        }
+        
 
     override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS)
-        {
-            configureVoice()
+    if (status == TextToSpeech.SUCCESS) {
+        configureVoice()
+
+        tts.speak(
+            "¡Qué onda! Soy NADOTA AI, creada por Sizo Alonso. ¿Qué se arma hoy?",
+            TextToSpeech.QUEUE_FLUSH,
+            null,
+            "presentacion"
+        )
     }
+}
 
     private fun configureVoice() {
         if (!::tts.isInitialized) return
