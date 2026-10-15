@@ -200,11 +200,12 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
 
         setContentView(root)
     }
+        }
 
     override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
+        if (status == TextToSpeech.SUCCESS)
+        {
             configureVoice()
-        }
     }
 
     private fun configureVoice() {
