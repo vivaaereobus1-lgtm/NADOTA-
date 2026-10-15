@@ -1,4 +1,4 @@
-package com.nadota.aipackage com.nadota.ai
+✅ package com.nadota.ai
 
 import android.app.Activity
 import android.os.Bundle
