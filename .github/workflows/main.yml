@@ -1,5 +1,3 @@
-name: Compilar APK NADOTA
-
 on:
   workflow_dispatch:
   push:
@@ -35,3 +33,4 @@ jobs:
         with:
           name: NADOTA-debug-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          
