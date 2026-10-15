@@ -1,4 +1,4 @@
-package com.nadota.ai
+package com.nadota.aipackage com.nadota.ai
 
 import android.app.Activity
 import android.os.Bundle
@@ -183,6 +183,63 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
             val msg = entry.text.toString().trim()
 
             if (msg.isNotEmpty()) {
+                history.append("\nTú: $msg\n")
+
+                
+                
+                    
+                preguntarIA(msg)
+    
+                
+
+                entry.text.clear()
+            }
+        }
+
+        root.addView(speak)
+
+        setContentView(root)
+    }
+        
+
+    override fun onInit(status: Int) {
+    if (status == TextToSpeech.SUCCESS) {
+        configureVoice()
+
+        tts.speak(
+            "¡Qué onda! Soy NADOTA AI, creada por Sizo Alonso. ¿Qué se arma hoy?",
+            TextToSpeech.QUEUE_FLUSH,
+            null,
+            "presentacion"
+        )
+    }
+}
+
+    private fun configureVoice() {
+        if (!::tts.isInitialized) return
+
+        tts.language =
+            if (style == 0)
+                Locale("es", "MX")
+            else
+                Locale("es", "US")
+
+        tts.setPitch(
+            if (style == 0) 1.15f else 0.9f
+        )
+
+        tts.setSpeechRate(
+            if (style == 0) 1.05f else 0.92f
+        )
+    }
+
+    override fun onDestroy() {
+        tts.stop()
+        tts.shutdown()
+        super.onDestroy()
+    }
+}
+
                 history.append("\nTú: $msg\n")
 
                 
