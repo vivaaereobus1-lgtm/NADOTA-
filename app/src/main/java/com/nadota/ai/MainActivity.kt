@@ -259,14 +259,7 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
     }
         
 
-    override fun onInit(status: Int) {
-    if (status == TextToSpeech.SUCCESS) {
-        configureVoice()
-
-        tts.speak(
-            "¡Qué onda! Soy NADOTA AI, creada por Sizo Alonso. ¿Qué se arma hoy?",
-            TextToSpeech.QUEUE_FLUSH,
-            null,
+    override fun onInit(st
             "presentacion"
         )
     }
@@ -279,20 +272,4 @@ class MainActivity : Activity(), TextToSpeech.OnInitListener {
             if (style == 0)
                 Locale("es", "MX")
             else
-                Locale("es", "US")
-
-        tts.setPitch(
-            if (style == 0) 1.15f else 0.9f
-        )
-
-        tts.setSpeechRate(
-            if (style == 0) 1.05f else 0.92f
-        )
-    }
-
-    override fun onDestroy() {
-        tts.stop()
-        tts.shutdown()
-        super.onDestroy()
-    }
-}
+                Locale("es",
